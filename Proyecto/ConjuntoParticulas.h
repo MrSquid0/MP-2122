@@ -1,0 +1,10 @@
+#ifndef PROYECTO_CONJUNTOPARTICULAS_H
+#define PROYECTO_CONJUNTOPARTICULAS_H
+
+
+class ConjuntoParticulas {
+
+};
+
+
+#endif //PROYECTO_CONJUNTOPARTICULAS_H
