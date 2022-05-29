@@ -28,7 +28,7 @@ void test2(string s) {
     int n = cp1.GetUtiles();
     for (int i = -1; i <= n + 1; i++)
         cp1.reemplazaParticula(i, nueva);
-    
+
     cout << "----- Después de reemplazar particulas ---- " << endl;
     cp1.mostrarInfo();
 }
@@ -85,7 +85,7 @@ void test5(string s) {
                     nube.borraParticula((random() % nro));
             }
         }
-        nube.mover(ANCHO, ALTO);
+        nube.moverParticulas(ANCHO, ALTO);
         nube.rebotar(ANCHO, ALTO);
 
     }

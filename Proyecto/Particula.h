@@ -18,7 +18,7 @@ public:
 
     // crea una partícula con valores al azar en posicion y velocidad
     // 0 <= x, y < MIN_DIM
-    // 0 <= dx, dx < MAX_VEL
+    // 0 <= dx, dy < MAX_VEL
     // radio fijo para la inicialización
     Particula();
 
@@ -36,6 +36,7 @@ public:
     void SetXY(float, float);
     void SetDX(float);
     void SetDY(float);
+    void SetRadio(float _r);
 
     // calcula distancia euclidea entre dos partículas
     float distancia(const Particula & otra) const;

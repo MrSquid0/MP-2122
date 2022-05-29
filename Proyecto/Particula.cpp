@@ -65,6 +65,10 @@ void Particula::SetDY(float _dy) {
     dy = _dy;
 }
 
+void Particula::SetRadio(float _r) {
+    radio = _r;
+}
+
 void Particula::ajustarPosicion(int ancho, int alto) {
 
     if (x >= ancho - radio)
