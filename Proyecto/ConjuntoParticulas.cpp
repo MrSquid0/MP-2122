@@ -1,4 +1,3 @@
-#include <iomanip>
 #include "ConjuntoParticulas.h"
 
 ConjuntoParticulas::ConjuntoParticulas() : set{0}, capacidad{0}, utiles{0}{};
@@ -23,17 +22,37 @@ int ConjuntoParticulas::GetUtiles() const{
 
 
 void ConjuntoParticulas::agregaParticula(Particula parti) {
-    if (utiles < capacidad){
+    if (utiles < capacidad) {
         set[utiles].SetXY(parti.GetX(), parti.GetY());
         set[utiles].SetDX(parti.GetDX());
         set[utiles].SetDY(parti.GetDY());
         set[utiles].SetRadio(parti.GetRadio());
         utiles++;
-    } else{
-        capacidad += TAM_BLOQUE;
-        delete [] set;
-        set = new Particula[capacidad];
-        agregaParticula(parti);
+    } else {
+        if (capacidad == 0) {
+            capacidad += TAM_BLOQUE;
+            delete [] set;
+            set = new Particula[capacidad];
+            agregaParticula(parti);
+        } else {
+            capacidad += TAM_BLOQUE;
+            Particula array[capacidad];
+            for (int i = 0; i < utiles; i++) {
+                array[i].SetXY(set[i].GetX(), set[i].GetY());
+                array[i].SetDX(set[i].GetDX());
+                array[i].SetDY(set[i].GetDY());
+                array[i].SetRadio(set[i].GetRadio());
+            }
+            delete[] set;
+            set = new Particula[capacidad];
+            for (int i = 0; i < utiles; i++) {
+                set[i].SetXY(array[i].GetX(), array[i].GetY());
+                set[i].SetDX(array[i].GetDX());
+                set[i].SetDY(array[i].GetDY());
+                set[i].SetRadio(array[i].GetRadio());
+            }
+            agregaParticula(parti);
+        }
     }
 }
 
@@ -55,7 +74,7 @@ void ConjuntoParticulas::borraParticula(int pos){
         this->capacidad = conjunto.capacidad;
         this->utiles = conjunto.utiles;
         for(int i=0; i<utiles; i++){
-            this->set[i].SetXY(conjunto.set[i].GetX(), conjunto.set->GetY());
+            this->set[i].SetXY(conjunto.set[i].GetX(), conjunto.set[i].GetY());
             this->set[i].SetDX(conjunto.set[i].GetDX());
             this->set[i].SetDY(conjunto.set[i].GetDY());
             this->set[i].SetRadio(conjunto.set[i].GetRadio());

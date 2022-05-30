@@ -26,13 +26,6 @@ public:
     int GetCapacidad() const;
     int GetUtiles() const;
 
-    void getArray(){
-        for (int i=0; i<capacidad; i++){
-            std::cout << "X de partícula " << i << ": " << set[i].GetX() << "\n";
-            std::cout << "RADIO: " << set[i].GetRadio() << std::endl;
-        }
-    }
-
     //Método para agregar partícula
     void agregaParticula(Particula parti);
 
@@ -45,7 +38,7 @@ public:
     //Método para reemplazar una partícula por otra
     void reemplazaParticula(int pos, Particula parti);
 
-    //Método mover partícula
+    //Método para mover partícula
     void moverParticulas(int ancho, int alto);
 
     //Método para rebotar
@@ -53,8 +46,6 @@ public:
 
     //Método para mostrar por pantalla un conjunto de partículas
     void mostrarInfo() const;
-
-
 };
 
 

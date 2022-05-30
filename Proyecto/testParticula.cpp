@@ -1,3 +1,4 @@
+/*
 
 #include <iostream>
 #include "Particula.h"
@@ -51,4 +52,4 @@ int main(){
     
     
     
-}
+}*/
