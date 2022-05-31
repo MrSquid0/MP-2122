@@ -1,4 +1,3 @@
-
 #ifndef PROYECTO_PINTAR_H
 #define PROYECTO_PINTAR_H
 
@@ -8,8 +7,19 @@
 
 class Pintar {
 public:
-    void pintarParticula (const Particula &p, Color c);
-    void pintarConjunto (const ConjuntoParticulas &cp, Color c);
+    //Método para pintar una bola
+    static void pintarParticula (const Particula &p, Color c);
+
+    //Método para pintar un ladrillo
+    static void pintarLadrillo(const Particula &p, Color c);
+
+    //Método para pintar un conjunto de bolas
+    static void pintarConjunto (const ConjuntoParticulas &cp, Color c);
+
+    //Método para pintar una pared de ladrillos
+    static void pintarPared(const ConjuntoParticulas &cp, Color c);
+
+    static bool colisionaBolaYLadrillo(Particula &_bola, Particula &_ladrillo);
 };
 
 

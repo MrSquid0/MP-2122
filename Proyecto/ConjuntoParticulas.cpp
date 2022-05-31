@@ -3,7 +3,7 @@
 ConjuntoParticulas::ConjuntoParticulas() : set{0}, capacidad{0}, utiles{0}{};
 
 ConjuntoParticulas::ConjuntoParticulas(int N) : set{new Particula[N]},
-capacidad{N}, utiles{N} {};
+                                                capacidad{N}, utiles{N} {};
 
 ConjuntoParticulas::~ConjuntoParticulas() {
     if (set != 0){
@@ -89,7 +89,7 @@ void ConjuntoParticulas::borraParticula(int pos){
     }
 }
 
-Particula ConjuntoParticulas::obtieneParticula(int pos) const {
+Particula& ConjuntoParticulas::obtieneParticula(int pos) const {
     return set[pos];
 }
 
@@ -118,12 +118,12 @@ void ConjuntoParticulas::mostrarInfo() const{
     if (utiles == 0){
         std::cout << "\nEl conjunto de partículas está vacío.\n";
     } else {
-    std::cout << "Capacidad total del conjunto: " << capacidad << std::endl;
-    std::cout << "Partículas en el conjunto: " << utiles << std::endl;
-    std::cout << "Datos de cada partícula: " << std::endl;
+        std::cout << "Capacidad total del conjunto: " << capacidad << std::endl;
+        std::cout << "Partículas en el conjunto: " << utiles << std::endl;
+        std::cout << "Datos de cada partícula: " << std::endl;
         for (int i=0; i<utiles; i++){
             std::cout << "Partícula " << i+1 << ": " << set[i].toString()
-            << std::endl;
+                      << std::endl;
         }
     }
 }

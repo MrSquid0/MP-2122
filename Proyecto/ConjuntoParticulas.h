@@ -33,7 +33,7 @@ public:
     void borraParticula(int pos);
 
     //Método para obtener partícula
-    Particula obtieneParticula(int pos) const;
+    Particula& obtieneParticula(int pos) const;
 
     //Método para reemplazar una partícula por otra
     void reemplazaParticula(int pos, Particula parti);

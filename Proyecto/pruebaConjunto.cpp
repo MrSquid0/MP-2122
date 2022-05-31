@@ -93,7 +93,7 @@ void test5(string s) {
 }
 
 
-/*int main(int argc, char* argv[]) {
+int main(int argc, char* argv[]) {
     int opc = 0;
     if (argc > 1)
          opc = atoi(argv[1]);
@@ -110,4 +110,4 @@ void test5(string s) {
     }
 
     return 0;
-}*/
+}

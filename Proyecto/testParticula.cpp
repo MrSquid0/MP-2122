@@ -1,5 +1,3 @@
-/*
-
 #include <iostream>
 #include "Particula.h"
 #include <cmath>
@@ -48,8 +46,3 @@ int main(){
     
     cout << "Distancia entre:\n" << otra.toString() << "\n" << p.toString();
     cout << "\nEs: " << p.distancia(otra) << " Colision " <<  otra.colision(p) << endl;
-    
-    
-    
-    
-}*/
