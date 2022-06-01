@@ -8,7 +8,6 @@ void Pintar::pintarParticula(const Particula &p, Color c) {
 void Pintar::pintarLadrillo(const Particula &p, Color c){
     Rectangle ladrillo = {p.GetX(), p.GetY(), 50, 15};
     DrawRectangleRec(ladrillo, c);
-    //DrawRectangle(p.GetX(), p.GetY(), 50, 15, c);
 }
 
 void Pintar::pintarConjunto(const ConjuntoParticulas &cp, Color c) {

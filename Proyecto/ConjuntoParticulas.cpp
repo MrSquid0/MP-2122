@@ -5,6 +5,19 @@ ConjuntoParticulas::ConjuntoParticulas() : set{0}, capacidad{0}, utiles{0}{};
 ConjuntoParticulas::ConjuntoParticulas(int N) : set{new Particula[N]},
                                                 capacidad{N}, utiles{N} {};
 
+ConjuntoParticulas::ConjuntoParticulas(const ConjuntoParticulas &conjunto) {
+    copiar(conjunto);
+}
+
+void ConjuntoParticulas::copiar(const ConjuntoParticulas &conjunto) {
+    this->capacidad = conjunto.capacidad;
+    this->utiles = conjunto.utiles;
+    this->set = new Particula[capacidad];
+    for (int i=0; i<utiles; i++){
+        this->set[i] = conjunto.set[i];
+    }
+}
+
 ConjuntoParticulas::~ConjuntoParticulas() {
     if (set != 0){
         delete [] set;
@@ -26,7 +39,6 @@ void ConjuntoParticulas::agregaParticula(Particula parti) {
         set[utiles].SetXY(parti.GetX(), parti.GetY());
         set[utiles].SetDX(parti.GetDX());
         set[utiles].SetDY(parti.GetDY());
-        set[utiles].SetRadio(parti.GetRadio());
         utiles++;
     } else {
         if (capacidad == 0) {
@@ -41,7 +53,6 @@ void ConjuntoParticulas::agregaParticula(Particula parti) {
                 array[i].SetXY(set[i].GetX(), set[i].GetY());
                 array[i].SetDX(set[i].GetDX());
                 array[i].SetDY(set[i].GetDY());
-                array[i].SetRadio(set[i].GetRadio());
             }
             delete[] set;
             set = new Particula[capacidad];
@@ -49,7 +60,6 @@ void ConjuntoParticulas::agregaParticula(Particula parti) {
                 set[i].SetXY(array[i].GetX(), array[i].GetY());
                 set[i].SetDX(array[i].GetDX());
                 set[i].SetDY(array[i].GetDY());
-                set[i].SetRadio(array[i].GetRadio());
             }
             agregaParticula(parti);
         }
@@ -77,7 +87,6 @@ void ConjuntoParticulas::borraParticula(int pos){
             this->set[i].SetXY(conjunto.set[i].GetX(), conjunto.set[i].GetY());
             this->set[i].SetDX(conjunto.set[i].GetDX());
             this->set[i].SetDY(conjunto.set[i].GetDY());
-            this->set[i].SetRadio(conjunto.set[i].GetRadio());
         }
         delete [] conjunto.set;
         conjunto.set = 0;
@@ -98,7 +107,6 @@ void ConjuntoParticulas::reemplazaParticula(int pos, Particula parti){
         set[pos].SetXY(parti.GetX(), parti.GetY());
         set[pos].SetDX(parti.GetDX());
         set[pos].SetDY(parti.GetDY());
-        set[pos].SetRadio(parti.GetRadio());
     }
 }
 
@@ -126,4 +134,59 @@ void ConjuntoParticulas::mostrarInfo() const{
                       << std::endl;
         }
     }
+}
+
+void ConjuntoParticulas::operator=(const ConjuntoParticulas &conjunto) {
+    delete [] this->set;
+    copiar(conjunto);
+}
+
+std::ostream& operator<<(std::ostream &os, const ConjuntoParticulas &conjunto){
+    conjunto.mostrarInfo();
+}
+
+Particula& ConjuntoParticulas::operator[](int i) const{
+    return this->set[i];
+}
+
+ConjuntoParticulas& operator +(ConjuntoParticulas &conjunto, Particula parti){
+    conjunto.agregaParticula(parti);
+}
+
+bool operator ==(ConjuntoParticulas const& conjunto1, ConjuntoParticulas const& conjunto2){
+    bool sonIguales = false;
+    if ((conjunto1.GetUtiles() == conjunto2.GetUtiles())){
+        for (int i=0; i<conjunto1.GetUtiles(); i++){
+            for (int j=0; j<conjunto2.GetUtiles(); j++){
+                if (conjunto1.obtieneParticula(i) == conjunto2.obtieneParticula(j)) {
+                    sonIguales = true;
+                    break;
+                }
+                else {
+                    if (j==conjunto2.GetUtiles()-1){
+                        sonIguales = false;
+                        return sonIguales;
+                    }
+                }
+            }
+        }
+    }
+    return sonIguales;
+}
+
+float ConjuntoParticulas::distanciaPromedio(Particula &parti) const {
+    float distancia = 0;
+    for(int i=0; i<utiles; i++){
+        distancia += parti.distancia(this->obtieneParticula(i));
+    }
+    distancia /= utiles;
+    return distancia;
+}
+
+bool operator<(const ConjuntoParticulas &cp1, const ConjuntoParticulas &cp2){
+    Particula cero(0,0,0,0,0);
+    if (cp1.distanciaPromedio(cero) < cp2.distanciaPromedio(cero))
+        return true;
+
+    return false;
 }

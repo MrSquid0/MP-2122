@@ -147,3 +147,38 @@ void Particula::intercambiaVelocidad(Particula & otra) {
     dy = aux_DY;
 
 }
+std::ostream& operator<<(std::ostream &os, const Particula &parti) {
+    os << parti.toString();
+    return os;
+}
+
+void operator>>(std::istream& in, Particula& parti){
+    int x, y, dx, dy;
+    do{
+        std::cout << "Introduce la posición X: " ;
+        in >> x;
+    } while (x < 0);
+    do{
+        std::cout << "Introduce la posición Y: ";
+        in >> y;
+    } while (y < 0);
+    do{
+        std::cout << "Introduce la velocidad de X: ";
+        in >> dx;
+    } while (dx < 0);
+
+    do{
+        std::cout << "Introduce la velocidad de Y: ";
+        in >> dy;
+    } while (dy < 0);
+    parti.SetXY(x,y);
+    parti.SetDX(dx);
+    parti.SetDY(dy);
+}
+
+bool operator ==(Particula const& parti1, Particula const& parti2){
+    if (parti1.distancia(parti2) < VALOR_PEQ) {
+        return true;
+    }
+    return false;
+}

@@ -92,7 +92,7 @@ void test5(string s) {
 
 }
 
-
+/*
 int main(int argc, char* argv[]) {
     int opc = 0;
     if (argc > 1)
@@ -110,4 +110,4 @@ int main(int argc, char* argv[]) {
     }
 
     return 0;
-}
+}*/

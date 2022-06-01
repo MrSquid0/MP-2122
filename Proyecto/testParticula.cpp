@@ -3,7 +3,7 @@
 #include <cmath>
 #include <string>
 #include <cstdlib> 
-
+/*
 using namespace std;
 int main(){
     int ANCHO = 10;
@@ -45,4 +45,4 @@ int main(){
     otra.mover(ANCHO, ALTO);
     
     cout << "Distancia entre:\n" << otra.toString() << "\n" << p.toString();
-    cout << "\nEs: " << p.distancia(otra) << " Colision " <<  otra.colision(p) << endl;
+    cout << "\nEs: " << p.distancia(otra) << " Colision " <<  otra.colision(p) << endl;*/

@@ -116,7 +116,7 @@ void desafio2(int const &N){
     //----------------------------------------------------------
 
 }
-
+/*
 int main(){
     int opc;
 
@@ -145,4 +145,4 @@ int main(){
             break; }
         default: {std::cout << "Número de desafío incorrecto." << std::endl; break;}
     }
-}
+}*/
