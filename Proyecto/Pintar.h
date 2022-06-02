@@ -17,9 +17,11 @@ public:
     static void pintarConjunto (const ConjuntoParticulas &cp, Color c);
 
     //Método para pintar una pared de ladrillos
-    static void pintarPared(const ConjuntoParticulas &cp, Color c);
+    static void pintarPared(const ConjuntoParticulas &cp);
 
     static bool colisionaBolaYLadrillo(Particula &_bola, Particula &_ladrillo);
+
+    static char Direccion();
 };
 
 

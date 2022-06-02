@@ -24,6 +24,9 @@ public:
     //Constructor de copia
     ConjuntoParticulas(const ConjuntoParticulas &conjunto);
 
+    //Constructor a través de un fichero
+    ConjuntoParticulas(const char* nombre);
+
     //Destructor
     ~ConjuntoParticulas();
 
@@ -43,10 +46,10 @@ public:
     //Método para reemplazar una partícula por otra
     void reemplazaParticula(int pos, Particula parti);
 
-    //Método para mover partícula
+    //Método para mover conjunto de partículas
     void moverParticulas(int ancho, int alto);
 
-    //Método para rebotar
+    //Método para rebotar conjunto de partículas
     void rebotar(int ancho, int alto);
 
     //Método para mostrar por pantalla un conjunto de partículas
@@ -64,7 +67,8 @@ public:
     //Operador sobrecargado + para agregar una partícula a un conjunto
     friend ConjuntoParticulas& operator +(ConjuntoParticulas &conjunto, Particula parti);
 
-    //Operador sobrecargado == para saber si 2 conjuntos son iguales
+    //Operador sobrecargado == para saber si 2 conjuntos son iguales (el orden de las
+    //partículas da igual)
     friend bool operator ==(ConjuntoParticulas const& conjunto1, ConjuntoParticulas const& conjunto2);
 
     //Método que devuelve la distancia promedio del conjunto a una partícula

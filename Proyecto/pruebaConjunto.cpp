@@ -1,4 +1,4 @@
-
+/*
 #include "Particula.h"
 #include "ConjuntoParticulas.h"
 #include <iostream>
@@ -92,7 +92,7 @@ void test5(string s) {
 
 }
 
-/*
+
 int main(int argc, char* argv[]) {
     int opc = 0;
     if (argc > 1)

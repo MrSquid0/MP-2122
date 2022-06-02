@@ -153,7 +153,7 @@ std::ostream& operator<<(std::ostream &os, const Particula &parti) {
 }
 
 void operator>>(std::istream& in, Particula& parti){
-    int x, y, dx, dy;
+    int x, y, dx, dy, radio;
     do{
         std::cout << "Introduce la posición X: " ;
         in >> x;
@@ -171,9 +171,15 @@ void operator>>(std::istream& in, Particula& parti){
         std::cout << "Introduce la velocidad de Y: ";
         in >> dy;
     } while (dy < 0);
+
+    do{
+        std::cout << "Introduce el radio: ";
+        in >> radio;
+    } while (radio < 0);
     parti.SetXY(x,y);
     parti.SetDX(dx);
     parti.SetDY(dy);
+    parti.SetRadio(RADIO);
 }
 
 bool operator ==(Particula const& parti1, Particula const& parti2){

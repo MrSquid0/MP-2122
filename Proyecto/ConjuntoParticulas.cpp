@@ -1,13 +1,39 @@
+#include <fstream>
 #include "ConjuntoParticulas.h"
 
 ConjuntoParticulas::ConjuntoParticulas() : set{0}, capacidad{0}, utiles{0}{};
 
-ConjuntoParticulas::ConjuntoParticulas(int N) : set{new Particula[N]},
-                                                capacidad{N}, utiles{N} {};
+ConjuntoParticulas::ConjuntoParticulas(int N){
+    if (N < 0)
+        N = 0;
+    set = new Particula[N];
+    capacidad = N;
+    utiles = N;
+}
 
 ConjuntoParticulas::ConjuntoParticulas(const ConjuntoParticulas &conjunto) {
     copiar(conjunto);
 }
+
+/*ConjuntoParticulas::ConjuntoParticulas(const char *nombre) {
+    std::string numero = fichero;
+    ConjuntoParticulas conjunto;
+    if (fichero){
+        int n;
+        int iteracion = 0;
+        while (fichero >> n) {
+            std::cout << n;
+*//*
+            if (iteracion == 0){
+                ConjuntoParticulas conjuntoNuevo(n);
+                conjunto = conjuntoNuevo;
+                iteracion++;
+            } else {
+                 >> conjunto.obtieneParticula(iteracion);
+            }*//*
+        }
+    }
+}*/
 
 void ConjuntoParticulas::copiar(const ConjuntoParticulas &conjunto) {
     this->capacidad = conjunto.capacidad;
@@ -107,6 +133,8 @@ void ConjuntoParticulas::reemplazaParticula(int pos, Particula parti){
         set[pos].SetXY(parti.GetX(), parti.GetY());
         set[pos].SetDX(parti.GetDX());
         set[pos].SetDY(parti.GetDY());
+    } else{
+        std::cout << "La posición no es válida";
     }
 }
 
@@ -143,6 +171,7 @@ void ConjuntoParticulas::operator=(const ConjuntoParticulas &conjunto) {
 
 std::ostream& operator<<(std::ostream &os, const ConjuntoParticulas &conjunto){
     conjunto.mostrarInfo();
+    return os;
 }
 
 Particula& ConjuntoParticulas::operator[](int i) const{
@@ -151,6 +180,7 @@ Particula& ConjuntoParticulas::operator[](int i) const{
 
 ConjuntoParticulas& operator +(ConjuntoParticulas &conjunto, Particula parti){
     conjunto.agregaParticula(parti);
+    return conjunto;
 }
 
 bool operator ==(ConjuntoParticulas const& conjunto1, ConjuntoParticulas const& conjunto2){
@@ -163,10 +193,8 @@ bool operator ==(ConjuntoParticulas const& conjunto1, ConjuntoParticulas const& 
                     break;
                 }
                 else {
-                    if (j==conjunto2.GetUtiles()-1){
-                        sonIguales = false;
-                        return sonIguales;
-                    }
+                    if (j==conjunto2.GetUtiles()-1)
+                        return false;
                 }
             }
         }
