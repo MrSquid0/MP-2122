@@ -74,10 +74,10 @@ public:
     bool operator ==(Particula const& parti2) const;
 };
 
-//Operador sobrecargado << para mostrar los datos de una partícula
+//Operador sobrecargado << para mostrar los datos (constructor a traves de fichero) de una partícula
 std::ostream& operator<<(std::ostream& os, Particula &parti);
 
-//Operador sobrecargado >> para introducir los datos de una partícula
+//Operador sobrecargado >> para introducir los datos (constructor a traves de fichero) de una partícula
 void operator>>(std::istream& in, Particula &parti);
 
 #endif
