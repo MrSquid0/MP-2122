@@ -4,24 +4,21 @@
 #include "Particula.h"
 #include "ConjuntoParticulas.h"
 #include "raylib.h"
+#include "parametros.h"
 
 class Pintar {
 public:
     //Método para pintar una bola
-    static void pintarParticula (const Particula &p, Color c);
+    void pintarParticula (const Particula &p, Color c);
 
     //Método para pintar un ladrillo
-    static void pintarLadrillo(const Particula &p, Color c);
+    void pintarLadrillo(const Particula &p, Color c);
 
-    //Método para pintar un conjunto de bolas
-    static void pintarConjunto (const ConjuntoParticulas &cp, Color c);
+    //Método para pintar una fila de partículas (ladrillos)
+    void pintarFila(const ConjuntoParticulas &fila, Color c);
 
-    //Método para pintar una pared de ladrillos
-    static void pintarPared(const ConjuntoParticulas &cp);
-
-    static bool colisionaBolaYLadrillo(Particula &_bola, Particula &_ladrillo);
-
-    static char Direccion();
+    //Método para pintar todas las filas de partículas (pared de ladrillos)
+    void pintarPared(const ConjuntoParticulas pared[]);
 };
 
 

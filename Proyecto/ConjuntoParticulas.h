@@ -53,23 +53,20 @@ public:
     void rebotar(int ancho, int alto);
 
     //Método para mostrar por pantalla un conjunto de partículas
-    void mostrarInfo() const;
+    std::string mostrarInfo() const;
 
     //Operador de asignación sobrecargado para asignar un conjunto a otro
     void operator=(const ConjuntoParticulas &conjunto);
-
-    //Operador sobrecargado << para mostrar por pantalla un conjunto
-    friend std::ostream& operator<<(std::ostream &os, const ConjuntoParticulas &conjunto);
 
     //Operador sobrecargado [] para acceso y modificación
     Particula& operator[](int i) const;
 
     //Operador sobrecargado + para agregar una partícula a un conjunto
-    friend ConjuntoParticulas& operator +(ConjuntoParticulas &conjunto, Particula parti);
+    ConjuntoParticulas& operator +(Particula parti);
 
     //Operador sobrecargado == para saber si 2 conjuntos son iguales (el orden de las
     //partículas da igual)
-    friend bool operator ==(ConjuntoParticulas const& conjunto1, ConjuntoParticulas const& conjunto2);
+    bool operator ==(ConjuntoParticulas const &cp2) const;
 
     //Método que devuelve la distancia promedio del conjunto a una partícula
     float distanciaPromedio(Particula &parti) const;
@@ -77,8 +74,11 @@ public:
     //Operador sobrecargado < para saber si la distancia promedio de las partículas
     //de cp1 al punto (0,0) es menor que la distancia promedio de las partículas de
     // cp2 a dicho punto.
-    friend bool operator<(const ConjuntoParticulas &cp1, const ConjuntoParticulas &cp2);
+    bool operator<(const ConjuntoParticulas &cp2) const;
 };
+
+//Operador sobrecargado << para mostrar por pantalla un conjunto
+std::ostream& operator<<(std::ostream &flujo, ConjuntoParticulas &cp);
 
 
 #endif //PROYECTO_CONJUNTOPARTICULAS_H

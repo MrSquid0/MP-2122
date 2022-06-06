@@ -131,8 +131,6 @@ std::string Particula::toString() const {
     string s = "";
     s = "(x: " + to_string(x) + ", y: " + to_string(y) + ", ";
     s += " dx: " + to_string(dx) + ", dy: " + to_string(dy) + " R: " + to_string(radio) + ")";
-
-
     return s;
 }
 
@@ -147,43 +145,42 @@ void Particula::intercambiaVelocidad(Particula & otra) {
     dy = aux_DY;
 
 }
-std::ostream& operator<<(std::ostream &os, const Particula &parti) {
+std::ostream& operator<<(std::ostream &os, Particula &parti) {
     os << parti.toString();
     return os;
 }
 
-void operator>>(std::istream& in, Particula& parti){
-    int x, y, dx, dy, radio;
-    do{
-        std::cout << "Introduce la posición X: " ;
-        in >> x;
-    } while (x < 0);
-    do{
-        std::cout << "Introduce la posición Y: ";
-        in >> y;
-    } while (y < 0);
-    do{
-        std::cout << "Introduce la velocidad de X: ";
-        in >> dx;
-    } while (dx < 0);
+void operator>>(std::istream& in, Particula &parti){
+    float x, y, dx, dy, radio;
+    std::cout << "\nIntroduce la posición X: " ;
+    in >> x;
+    //if (x < 0) //No tiene sentido que la X sea negativa
+    //    x = 0;
 
-    do{
-        std::cout << "Introduce la velocidad de Y: ";
-        in >> dy;
-    } while (dy < 0);
+    std::cout << "Introduce la posición Y: ";
+    in >> y;
+    //if (y < 0) //No tiene sentido que la Y sea negativa
+    //    y = 0;
 
-    do{
-        std::cout << "Introduce el radio: ";
-        in >> radio;
-    } while (radio < 0);
+    std::cout << "Introduce la velocidad de X: ";
+    in >> dx;
+
+    std::cout << "Introduce la velocidad de Y: ";
+    in >> dy;
+
+    std::cout << "Introduce el radio: ";
+    in >> radio;
+    if (radio < 0) //No tiene sentido que el radio sea negativo
+        radio = 0;
+
     parti.SetXY(x,y);
     parti.SetDX(dx);
     parti.SetDY(dy);
-    parti.SetRadio(RADIO);
+    parti.SetRadio(radio);
 }
 
-bool operator ==(Particula const& parti1, Particula const& parti2){
-    if (parti1.distancia(parti2) < VALOR_PEQ) {
+bool Particula::operator ==(Particula const& parti2) const{
+    if (this->distancia(parti2) < VALOR_PEQ) {
         return true;
     }
     return false;

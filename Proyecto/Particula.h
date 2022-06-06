@@ -70,14 +70,14 @@ public:
     // para simular el choque elástico entre dos partículas
     void intercambiaVelocidad(Particula & otra);
 
-    //Operador sobrecargado << para mostrar los datos de una partícula
-    friend std::ostream& operator<<(std::ostream& os, Particula const& parti);
-
-    //Operador sobrecargado >> para introducir los datos de una partícula
-    friend void operator>>(std::istream& in, Particula& parti);
-
     //Operador sobrecargado == para saber si 2 partículas son iguales
-    friend bool operator ==(Particula const& parti1, Particula const& parti2);
+    bool operator ==(Particula const& parti2) const;
 };
+
+//Operador sobrecargado << para mostrar los datos de una partícula
+std::ostream& operator<<(std::ostream& os, Particula &parti);
+
+//Operador sobrecargado >> para introducir los datos de una partícula
+void operator>>(std::istream& in, Particula &parti);
 
 #endif

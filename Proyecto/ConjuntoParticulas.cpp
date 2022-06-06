@@ -15,25 +15,24 @@ ConjuntoParticulas::ConjuntoParticulas(const ConjuntoParticulas &conjunto) {
     copiar(conjunto);
 }
 
-/*ConjuntoParticulas::ConjuntoParticulas(const char *nombre) {
-    std::string numero = fichero;
-    ConjuntoParticulas conjunto;
-    if (fichero){
-        int n;
-        int iteracion = 0;
-        while (fichero >> n) {
-            std::cout << n;
-*//*
-            if (iteracion == 0){
-                ConjuntoParticulas conjuntoNuevo(n);
-                conjunto = conjuntoNuevo;
-                iteracion++;
-            } else {
-                 >> conjunto.obtieneParticula(iteracion);
-            }*//*
+ConjuntoParticulas::ConjuntoParticulas(const char *nombre) {
+    capacidad = 0;
+    utiles = 0;
+    set = 0;
+    std::fstream fichero(nombre);
+    if (!nombre){
+        std::cout << "\nEl archivo está vacío o no existe.";
+    } else {
+        int numParticulas;
+        fichero >> numParticulas;
+
+        Particula fila;
+        for (int i=0; i<numParticulas; i++) {
+            fichero >> fila;
+            this->agregaParticula(fila);
         }
     }
-}*/
+}
 
 void ConjuntoParticulas::copiar(const ConjuntoParticulas &conjunto) {
     this->capacidad = conjunto.capacidad;
@@ -65,6 +64,7 @@ void ConjuntoParticulas::agregaParticula(Particula parti) {
         set[utiles].SetXY(parti.GetX(), parti.GetY());
         set[utiles].SetDX(parti.GetDX());
         set[utiles].SetDY(parti.GetDY());
+        set[utiles].SetRadio(parti.GetRadio());
         utiles++;
     } else {
         if (capacidad == 0) {
@@ -79,6 +79,7 @@ void ConjuntoParticulas::agregaParticula(Particula parti) {
                 array[i].SetXY(set[i].GetX(), set[i].GetY());
                 array[i].SetDX(set[i].GetDX());
                 array[i].SetDY(set[i].GetDY());
+                array[i].SetRadio(set[i].GetRadio());
             }
             delete[] set;
             set = new Particula[capacidad];
@@ -86,6 +87,7 @@ void ConjuntoParticulas::agregaParticula(Particula parti) {
                 set[i].SetXY(array[i].GetX(), array[i].GetY());
                 set[i].SetDX(array[i].GetDX());
                 set[i].SetDY(array[i].GetDY());
+                set[i].SetRadio(array[i].GetRadio());
             }
             agregaParticula(parti);
         }
@@ -150,18 +152,20 @@ void ConjuntoParticulas::rebotar(int ancho, int alto) {
     }
 }
 
-void ConjuntoParticulas::mostrarInfo() const{
-    if (utiles == 0){
-        std::cout << "\nEl conjunto de partículas está vacío.\n";
+std::string ConjuntoParticulas::mostrarInfo() const {
+    std::string s = "\n";
+    if (utiles == 0) {
+        s += "\nEl conjunto de partículas está vacío.\n";
     } else {
-        std::cout << "Capacidad total del conjunto: " << capacidad << std::endl;
-        std::cout << "Partículas en el conjunto: " << utiles << std::endl;
-        std::cout << "Datos de cada partícula: " << std::endl;
-        for (int i=0; i<utiles; i++){
-            std::cout << "Partícula " << i+1 << ": " << set[i].toString()
-                      << std::endl;
+        s += "Capacidad total del conjunto: " + std::to_string(capacidad) + "\n";
+        s += "Partículas en el conjunto: " + std::to_string(utiles) + "\n";
+        s += "Datos de cada partícula: \n";
+        for (int i = 0; i < utiles; i++) {
+            s += "Partícula " + std::to_string(i + 1) + ": " +
+                    set[i].toString() + "\n";
         }
     }
+    return s;
 }
 
 void ConjuntoParticulas::operator=(const ConjuntoParticulas &conjunto) {
@@ -169,35 +173,33 @@ void ConjuntoParticulas::operator=(const ConjuntoParticulas &conjunto) {
     copiar(conjunto);
 }
 
-std::ostream& operator<<(std::ostream &os, const ConjuntoParticulas &conjunto){
-    conjunto.mostrarInfo();
-    return os;
-}
-
 Particula& ConjuntoParticulas::operator[](int i) const{
     return this->set[i];
 }
 
-ConjuntoParticulas& operator +(ConjuntoParticulas &conjunto, Particula parti){
-    conjunto.agregaParticula(parti);
-    return conjunto;
+ConjuntoParticulas &ConjuntoParticulas::operator+(Particula parti) {
+    this->agregaParticula(parti);
+    return *this;
 }
 
-bool operator ==(ConjuntoParticulas const& conjunto1, ConjuntoParticulas const& conjunto2){
+bool ConjuntoParticulas::operator ==(ConjuntoParticulas const &cp2) const{
     bool sonIguales = false;
-    if ((conjunto1.GetUtiles() == conjunto2.GetUtiles())){
-        for (int i=0; i<conjunto1.GetUtiles(); i++){
-            for (int j=0; j<conjunto2.GetUtiles(); j++){
-                if (conjunto1.obtieneParticula(i) == conjunto2.obtieneParticula(j)) {
-                    sonIguales = true;
-                    break;
-                }
-                else {
-                    if (j==conjunto2.GetUtiles()-1)
-                        return false;
+    if ((this->GetUtiles() == cp2.GetUtiles())){
+        if (this->GetUtiles() != 0 && cp2.GetUtiles() != 0){
+            for (int i=0; i<this->GetUtiles(); i++){
+                for (int j=0; j<cp2.GetUtiles(); j++){
+                    if (this->obtieneParticula(i) == cp2.obtieneParticula(j)) {
+                        sonIguales = true;
+                        break;
+                    }
+                    else {
+                        if (j==cp2.GetUtiles()-1)
+                            return false;
+                    }
                 }
             }
-        }
+        } else
+            sonIguales = true;
     }
     return sonIguales;
 }
@@ -211,10 +213,15 @@ float ConjuntoParticulas::distanciaPromedio(Particula &parti) const {
     return distancia;
 }
 
-bool operator<(const ConjuntoParticulas &cp1, const ConjuntoParticulas &cp2){
+bool ConjuntoParticulas::operator<(const ConjuntoParticulas &cp2) const{
     Particula cero(0,0,0,0,0);
-    if (cp1.distanciaPromedio(cero) < cp2.distanciaPromedio(cero))
+    if (this->distanciaPromedio(cero) < cp2.distanciaPromedio(cero))
         return true;
 
     return false;
+}
+
+std::ostream& operator<<(std::ostream &flujo, ConjuntoParticulas &cp){
+    flujo << cp.mostrarInfo();
+    return flujo;
 }
