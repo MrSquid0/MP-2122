@@ -1,5 +1,5 @@
-#include "Particula.h"
-#include "ConjuntoParticulas.h"
+#include "../Header files/Particula.h"
+#include "../Header files/ConjuntoParticulas.h"
 #include <iostream>
 #include <cassert>
 

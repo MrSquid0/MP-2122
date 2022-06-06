@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Particula.h"
+#include "../Header files/Particula.h"
 #include <cmath>
 #include <string>
 #include <cstdlib>

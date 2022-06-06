@@ -1,4 +1,4 @@
-#include "Game.h"
+#include "Header files/Game.h"
 
 int main(){
     // Inicializar objetos y ventana

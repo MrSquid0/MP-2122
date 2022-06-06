@@ -1,4 +1,4 @@
-#include "Pintar.h"
+#include "../Header files/Pintar.h"
 
 void Pintar::pintarParticula(const Particula &p, Color c) {
     DrawCircle(p.GetX(), p.GetY(), p.GetRadio(), c);

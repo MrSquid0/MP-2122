@@ -1,4 +1,4 @@
-#include "Particula.h"
+#include "../Header files/Particula.h"
 #include <cmath>
 #include <iostream>
 

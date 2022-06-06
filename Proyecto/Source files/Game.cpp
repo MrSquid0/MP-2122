@@ -1,4 +1,4 @@
-#include "Game.h"
+#include "../Header files/Game.h"
 
 bool Game::getJuegoActivo() const{
     return juegoActivo;
