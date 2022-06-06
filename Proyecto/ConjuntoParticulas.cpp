@@ -1,4 +1,3 @@
-#include <fstream>
 #include "ConjuntoParticulas.h"
 
 ConjuntoParticulas::ConjuntoParticulas() : set{0}, capacidad{0}, utiles{0}{};

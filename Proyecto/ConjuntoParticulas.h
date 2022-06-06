@@ -3,6 +3,7 @@
 
 
 #include "Particula.h"
+#include <fstream>
 
 const int TAM_BLOQUE = 3;
 

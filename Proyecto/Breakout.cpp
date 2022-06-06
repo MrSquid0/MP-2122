@@ -1,5 +1,3 @@
-#include <fstream>
-#include "Pintar.h"
 #include "Game.h"
 
 int main(){
