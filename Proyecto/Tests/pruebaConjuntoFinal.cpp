@@ -292,7 +292,7 @@ void test9(string s) {
 // un número entre el 1 y el 10
 int main(int argc, char *argv[]) {
 
-    if (argc < 1) {
+    if (argc < 2) {
         cerr << "Uso: pruebaFinal <nroTest> donde nroTest es un valor entre 0 y 9" << endl;
         exit(-1);
     }

@@ -42,11 +42,20 @@ void ConjuntoParticulas::copiar(const ConjuntoParticulas &conjunto) {
     }
 }
 
-ConjuntoParticulas::~ConjuntoParticulas() {
+void ConjuntoParticulas::reservarMemoria() {
+    liberarMemoria();
+    set = new Particula[capacidad];
+}
+
+void ConjuntoParticulas::liberarMemoria() {
     if (set != 0){
         delete [] set;
         set = 0;
     }
+}
+
+ConjuntoParticulas::~ConjuntoParticulas() {
+    liberarMemoria();
 }
 
 int ConjuntoParticulas::GetCapacidad() const{
@@ -68,8 +77,7 @@ void ConjuntoParticulas::agregaParticula(Particula parti) {
     } else {
         if (capacidad == 0) {
             capacidad += TAM_BLOQUE;
-            delete [] set;
-            set = new Particula[capacidad];
+            reservarMemoria();
             agregaParticula(parti);
         } else {
             capacidad += TAM_BLOQUE;
@@ -80,8 +88,7 @@ void ConjuntoParticulas::agregaParticula(Particula parti) {
                 array[i].SetDY(set[i].GetDY());
                 array[i].SetRadio(set[i].GetRadio());
             }
-            delete[] set;
-            set = new Particula[capacidad];
+            reservarMemoria();
             for (int i = 0; i < utiles; i++) {
                 set[i].SetXY(array[i].GetX(), array[i].GetY());
                 set[i].SetDX(array[i].GetDX());
@@ -115,8 +122,7 @@ void ConjuntoParticulas::borraParticula(int pos){
             this->set[i].SetDX(conjunto.set[i].GetDX());
             this->set[i].SetDY(conjunto.set[i].GetDY());
         }
-        delete [] conjunto.set;
-        conjunto.set = 0;
+        conjunto.liberarMemoria();
         conjunto.capacidad = 0;
         conjunto.utiles = 0;
 
@@ -168,7 +174,7 @@ std::string ConjuntoParticulas::mostrarInfo() const {
 }
 
 void ConjuntoParticulas::operator=(const ConjuntoParticulas &conjunto) {
-    delete [] this->set;
+    liberarMemoria();
     copiar(conjunto);
 }
 

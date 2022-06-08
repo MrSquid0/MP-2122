@@ -12,8 +12,15 @@ private:
     Particula *set;
     int capacidad;
     int utiles;
+
     //Método auxiliar para copiar conjuntos
     void copiar(const ConjuntoParticulas &conjunto);
+
+    //Método para reservar memoria
+    void reservarMemoria ();
+
+    //Método para liberar memoria
+    void liberarMemoria ();
 
 public:
     //Constructor sin parámetros
