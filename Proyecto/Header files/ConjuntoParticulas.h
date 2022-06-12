@@ -43,7 +43,7 @@ public:
     int GetUtiles() const;
 
     //Método para agregar partícula
-    void agregaParticula(Particula parti);
+    void agregaParticula(Particula &parti);
 
     //Método para borrar partícula
     void borraParticula(int pos);
@@ -52,7 +52,7 @@ public:
     Particula& obtieneParticula(int pos) const;
 
     //Método para reemplazar una partícula por otra
-    void reemplazaParticula(int pos, Particula parti);
+    void reemplazaParticula(int pos, Particula &parti);
 
     //Método para mover conjunto de partículas
     void moverParticulas(int ancho, int alto);
@@ -70,7 +70,7 @@ public:
     Particula& operator[](int i) const;
 
     //Operador sobrecargado + para agregar una partícula a un conjunto
-    ConjuntoParticulas& operator +(Particula parti);
+    ConjuntoParticulas& operator +(Particula &parti);
 
     //Operador sobrecargado == para saber si 2 conjuntos son iguales (el orden de las
     //partículas da igual)

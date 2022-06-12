@@ -67,7 +67,7 @@ int ConjuntoParticulas::GetUtiles() const{
 }
 
 
-void ConjuntoParticulas::agregaParticula(Particula parti) {
+void ConjuntoParticulas::agregaParticula(Particula &parti) {
     if (utiles < capacidad) {
         set[utiles].SetXY(parti.GetX(), parti.GetY());
         set[utiles].SetDX(parti.GetDX());
@@ -135,7 +135,7 @@ Particula& ConjuntoParticulas::obtieneParticula(int pos) const {
     return set[pos];
 }
 
-void ConjuntoParticulas::reemplazaParticula(int pos, Particula parti){
+void ConjuntoParticulas::reemplazaParticula(int pos, Particula &parti){
     if (pos >= 0 && pos < utiles) {
         set[pos].SetXY(parti.GetX(), parti.GetY());
         set[pos].SetDX(parti.GetDX());
@@ -182,7 +182,7 @@ Particula& ConjuntoParticulas::operator[](int i) const{
     return this->set[i];
 }
 
-ConjuntoParticulas &ConjuntoParticulas::operator+(Particula parti) {
+ConjuntoParticulas &ConjuntoParticulas::operator+(Particula &parti) {
     this->agregaParticula(parti);
     return *this;
 }
