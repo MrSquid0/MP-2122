@@ -10,8 +10,7 @@ using namespace std;
  * guion de la práctica 5 pone que "no se debe modificar", pero es que literalmente
  * he añadido solo 2 lineas y no altera en absoluto el comportamiento original de
  * la funcion. Si se tiene cualquier duda respecto a esto, estoy listo para
- * responderlas.
- */
+ * responderlas.*/
 
 void test(const char frase[]){
     char palabra[MAX_SIZE];
